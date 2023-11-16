@@ -4,6 +4,7 @@ import DetailProduct from "../components/DetailProduct";
 import AnonymousLayout from "../layouts/AnonymousLayout";
 import Login from "../pages/Login";
 import { renderRoutes } from "./generate-routes";
+import Resgister from "../pages/Resgister";
 
 export const routes = [
   {
@@ -25,7 +26,6 @@ export const routes = [
   },
   {
     layout: AnonymousLayout,
-
     routes: [
       {
         name: "login",
@@ -36,6 +36,18 @@ export const routes = [
       },
     ],
   },
+  {
+    layout: Resgister,
+    routes: [
+      {
+        name: "resgister",
+        title: "Register page",
+        component: Resgister,
+        path: "/register",
+        
+      }
+    ]
+  }
 ];
 
 export const Routes = renderRoutes(routes);
