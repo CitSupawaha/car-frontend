@@ -3,7 +3,7 @@ import Prodect from "../components/Prodect";
 import axios from "axios";
 const Home = () => {
   const [car, setCars] = useState([]);
-
+  const token = localStorage.getItem("accessToken");
   useEffect(() => {
     getData();
   },[]);
@@ -14,7 +14,7 @@ const Home = () => {
         "http://localhost:3001/api/car?limit=10&page=1",
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlkIjoiNCIsImlhdCI6MTY5OTk3Nzk4NSwiZXhwIjoxNzAwNTgyNzg1fQ.F1GXtAIe-eeo4DaAeRoHdcRWZM4BNTGiZWSwoD6Wm3s`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -29,7 +29,7 @@ const Home = () => {
   console.log('res ==> data',car);
   return (
     <>
-      <div className="p-20"><Prodect products={car} /></div>
+      <div className="pt-14"><Prodect products={car} /></div>
     </>
   );
 };

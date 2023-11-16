@@ -5,8 +5,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const Header = () => {
   const navigation = [
-    { name: "Home", href: "/home" },
-    { name: "Features", href: "/login" },
+    { name: "Home", href: "/" },
+    // { name: "Features", href: "/login" },
     // { name: "Marketplace", href: "#" },
     // { name: "Company", href: "#" },
   ];
@@ -34,8 +34,8 @@ const Header = () => {
               {item.name}
             </a>
           ))}
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Log in <span aria-hidden="true">&rarr;</span>
+          <a href="/login" className="text-sm font-semibold leading-6 text-white">
+            Log out <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </nav>

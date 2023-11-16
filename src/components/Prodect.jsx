@@ -4,7 +4,8 @@ import Car from "../assets/image/car.png";
 import { useNavigate } from "react-router-dom";
 
 const Prodect = (props) => {
-    const navigate = useNavigate();
+  
+  const navigate = useNavigate();
   console.log("props ==> ", props);
   //   function classNames(...classNamees) {
   //     return classNamees.filter(Boolean).join(" ");
@@ -12,9 +13,25 @@ const Prodect = (props) => {
 
   return (
     <div className="">
-      <div className="mx-auto max-w-sreen overflow-hidden sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
         <h2 className="sr-only">Products</h2>
-        <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-10 lg:grid-cols-5 lg:gap-x-6">
+        <nav aria-label="Breadcrumb">
+          <ol
+            role="list"
+            className="mx-auto flex max-w-7xl items-center "
+          >
+            <li className="text-sm">
+              <a
+                href="/"
+                aria-current="page"
+                className="font-medium text-gray-500 text-xl hover:text-gray-600"
+              >
+                Car
+              </a>
+            </li>
+          </ol>
+        </nav>
+        <div className="grid grid-cols-1 mt-10 gap-y-4 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-10 lg:grid-cols-2 xl:grid-cols-3 lg:gap-x-6">
           {props.products.map((product) => (
             <div
               key={product.id}
@@ -36,7 +53,7 @@ const Prodect = (props) => {
                   </p>
 
                   <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2 text-start">
-                    Model : {product.model}  จำนวนที่นัง : {product.seat} ที่
+                    Model : {product.model} จำนวนที่นัง : {product.seat} ที่
                   </p>
                   <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2 text-start">
                     ประเภทรถ : {product.fuelType} สี : {product.color}
@@ -46,18 +63,21 @@ const Prodect = (props) => {
               <div className="flex items-center justify-between md:items-center lg:justify-between ">
                 <div className="flex">
                   <p className="!mb-0 text-2xl font-bold text-black">
-                    {product.price} / <span className="text-lg text-gray-500">วัน</span>
+                    {product.price} /{" "}
+                    <span className="text-lg text-gray-500">วัน</span>
                   </p>
                 </div>
                 <button
-                 onClick={() => navigate("/product", {
-                    state: {
-                      id: product.id,
-                    },
-                  })}
+                  onClick={() =>
+                    navigate("/product", {
+                      state: {
+                        id: product.id,
+                      },
+                    })
+                  }
                   className="linear rounded-[10px] bg-brand-900 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700"
                 >
-                 จองตอนนี้
+                  จองตอนนี้
                 </button>
               </div>
             </div>

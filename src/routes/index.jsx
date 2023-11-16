@@ -13,7 +13,7 @@ export const routes = [
         name: "home",
         title: "Home page",
         component: Home,
-        path: "/home",
+        path: "/",
       },
       {
         name: "product-key",
@@ -25,7 +25,7 @@ export const routes = [
   },
   {
     layout: AnonymousLayout,
-    
+
     routes: [
       {
         name: "login",
