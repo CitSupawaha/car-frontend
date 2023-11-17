@@ -264,7 +264,7 @@ const DetailProduct = () => {
                   <Form.Item name="lastName" label="นามสุกุล">
                     <Input />
                   </Form.Item>
-                  <Form.Item name="phone์Number" label="เบอร์โทรศัพท์">
+                  <Form.Item name="phoneNumber" label="เบอร์โทรศัพท์">
                     <Input />
                   </Form.Item>
                   <Form.Item name="email" label="Email">
