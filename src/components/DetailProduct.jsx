@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 import axios from "axios";
 import Car from "../assets/image/car.png";
-import { DatePicker } from "antd";
+import { DatePicker, message } from "antd";
 import dayjs from "dayjs";
 const token = localStorage.getItem("accessToken");
 const DetailProduct = () => {
@@ -33,11 +33,40 @@ const DetailProduct = () => {
       });
       if (res.status === 200) {
         setData(res.data);
-        console.log("res ==> ", res);
       }
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const onRentBoook = async (value) => {
+    await axios
+      .post(
+        "http://localhost:3001/api/book",
+        {
+          ...value,
+          startDate: value.date ?  dayjs(value.date[0]).format() : dayjs().format(),
+          endDate: value.date ? dayjs(value.date[1]).format() : dayjs().format(),
+          carId: initailValue.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(function (response) {
+        if (response.status === 201) {
+          message.success('ทำรายสำเร็จ')
+        } else {
+          console.log('ทำรายการไม่สำเร็จ โปรดลองใหม่อีกครั้ง');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    console.log("value v===> ", value);
+    console.log("start date ==> ", dayjs(value.date[0]).format());
   };
   const product = {
     name: "Basic Tee 6-Pack",
@@ -163,7 +192,7 @@ const DetailProduct = () => {
               </div>
 
               <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
-                {product.images.map((image,idx) => (
+                {product.images.map((image, idx) => (
                   <Tab.Panel key={idx}>
                     <img
                       src={image.src}
@@ -223,11 +252,16 @@ const DetailProduct = () => {
             <div className="lg:col-span-3 lg:mt-0">
               <div className="mt-10">
                 <p className="text-black text-xl">กรอกแบบฟอร์มการจอง</p>
-                <Form form={form} layout="vertical" autoComplete="off">
-                  <Form.Item name="name" label="ชื่อ">
+                <Form
+                  form={form}
+                  layout="vertical"
+                  autoComplete="off"
+                  onFinish={onRentBoook}
+                >
+                  <Form.Item name="firstName" label="ชื่อ">
                     <Input />
                   </Form.Item>
-                  <Form.Item name="age" label="นามสุกุล">
+                  <Form.Item name="lastName" label="นามสุกุล">
                     <Input />
                   </Form.Item>
                   <Form.Item name="phone์Number" label="เบอร์โทรศัพท์">
@@ -238,7 +272,7 @@ const DetailProduct = () => {
                   </Form.Item>
                   <Form.Item name="date" label="วันที่เริ่ม-สิ้นสุด">
                     <RangePicker
-                    className="w-full p-2"
+                      className="w-full p-2"
                       defaultValue={[
                         dayjs("2015/01/01", dateFormat),
                         dayjs("2015/01/01", dateFormat),
