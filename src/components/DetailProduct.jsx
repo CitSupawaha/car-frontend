@@ -44,7 +44,11 @@ const DetailProduct = () => {
       .post(
         "http://localhost:3001/api/book",
         {
-          ...value,
+          firstName: value.firstName,
+          lastName: value.lastName,
+          email: value.email,
+          detail: value.detail,
+          phoneNumber: value.phoneNumber,
           startDate: value.date ?  dayjs(value.date[0]).format() : dayjs().format(),
           endDate: value.date ? dayjs(value.date[1]).format() : dayjs().format(),
           carId: initailValue.id,
