@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Input, Form } from "antd";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 import axios from "axios";
 import Car from "../assets/image/car.png";
@@ -18,6 +18,7 @@ const DetailProduct = () => {
   const [data, setData] = useState();
   const [form] = Form.useForm();
   const { TextArea } = Input;
+  const navigate = useNavigate()
   const { RangePicker } = DatePicker;
   useEffect(() => {
     if (initailValue.id) {
@@ -62,6 +63,12 @@ const DetailProduct = () => {
       .then(function (response) {
         if (response.status === 201) {
           message.success('ทำรายสำเร็จ')
+          console.log('res ===> ',response);
+          navigate("/slip", {
+            state: {
+              id: response.data.id,
+            },
+          })
         } else {
           console.log('ทำรายการไม่สำเร็จ โปรดลองใหม่อีกครั้ง');
         }

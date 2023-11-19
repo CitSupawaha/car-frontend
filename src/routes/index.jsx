@@ -5,6 +5,7 @@ import AnonymousLayout from "../layouts/AnonymousLayout";
 import Login from "../pages/Login";
 import { renderRoutes } from "./generate-routes";
 import Resgister from "../pages/Resgister";
+import Slip from "../components/Slip";
 
 export const routes = [
   {
@@ -22,6 +23,12 @@ export const routes = [
         component: DetailProduct,
         path: "/product",
       },
+      {
+        name: "slip",
+        title: "slip",
+        component: Slip,
+        path: '/slip'
+      }
     ],
   },
   {
@@ -44,7 +51,7 @@ export const routes = [
         title: "Register page",
         component: Resgister,
         path: "/register",
-        
+
       }
     ]
   }
